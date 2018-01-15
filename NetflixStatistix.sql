@@ -1,5 +1,4 @@
 -- Netflix Statistix database, Thijs van der Woude (2126506)
--- Alleen nog keys
 
 USE master;
 
@@ -10,7 +9,7 @@ GO
 USE NetflixStatistix;
 
 CREATE TABLE Film(
-	Id int NOT NULL PRIMARY KEY,
+	Id int,
 	Titel nvarchar(150),
 	Leeftijdsindicatie nvarchar(16),
 	Taal nvarchar(50),
@@ -31,7 +30,7 @@ INSERT INTO Film VALUES
 (8017,	'A Clockwork Orange',				'16 jaar en ouder',	'Engels',				'02:16',	'SF');
 
 CREATE TABLE Serie(
-	Serie nvarchar(150) NOT NULL PRIMARY KEY,
+	Serie nvarchar(150),
 	Seizoen nvarchar(6),
 	Leeftijd nvarchar(16),
 	Taal nvarchar(50),
@@ -44,8 +43,8 @@ INSERT INTO Serie VALUES
 ('Fargo',			'S01E01',	'16 jaar en ouder',	'Engels-Amerikaans',	'Spanning',		'Breaking Bad');
 
 CREATE TABLE Aflevering(
-	Id int NOT NULL PRIMARY KEY,
-	Serie nvarchar(150) FOREIGN KEY REFERENCES Serie(Serie),
+	Id int,
+	Serie nvarchar(150),
 	Seizoen nvarchar(6),
 	Titel nvarchar (150),
 	Tijdsduur time
@@ -102,7 +101,7 @@ INSERT INTO Aflevering VALUES
 (3110,	'Fargo',		'S02E10',	'Palindrome',						'01:08');
 
 CREATE TABLE Account(
-	Abonneenummer int NOT NULL PRIMARY KEY,
+	Abonneenummer int,
 	Naam nvarchar(100),
 	Straat nvarchar(100),
 	Postcode nvarchar(7),
@@ -115,39 +114,20 @@ INSERT INTO Account VALUES
 (5285824,	'F. de Kat',		'Kantlaan',				'8542 CD',	'11',	'Breda');
 
 CREATE TABLE Profiel(
-	Abonneenummer int FOREIGN KEY REFERENCES Account(Abonneenummer),
+	Abonneenummer int,
 	Profielnaam nvarchar(50),
 	Geboortedatum date
 );
 INSERT INTO Profiel VALUES
 (1215426,	'Frank',	CONVERT(date, '25-1-1968', 105)),
-(1215426,	'Frank',	CONVERT(date, '25-1-1968', 105)),
-(1215426,	'Frank',	CONVERT(date, '25-1-1968', 105)),
-(1215426,	'Madelief',	CONVERT(date, '19-8-2001', 105)),
-(1215426,	'Madelief',	CONVERT(date, '19-8-2001', 105)),
-(1215426,	'Madelief',	CONVERT(date, '19-8-2001', 105)),
-(1215426,	'Madelief',	CONVERT(date, '19-8-2001', 105)),
-(1215426,	'Madelief',	CONVERT(date, '19-8-2001', 105)),
-(1215426,	'Madelief',	CONVERT(date, '19-8-2001', 105)),
 (1215426,	'Madelief',	CONVERT(date, '19-8-2001', 105)),
 (5602533,	'Petrus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Petrus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Petrus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Petrus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Petrus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Paulus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Paulus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Paulus',	CONVERT(date, '26-6-1999', 105)),
-(5602533,	'Paulus',	CONVERT(date, '26-6-1999', 105)),
 (5602533,	'Paulus',	CONVERT(date, '26-6-1999', 105)),
 (5285824,	'Fritz',	CONVERT(date, '19-8-1968', 105)),
-(5285824,	'Fritz',	CONVERT(date, '19-8-1968', 105)),
-(5285824,	'Fritz',	CONVERT(date, '19-8-1968', 105)),
-(5285824,	'Diana',	CONVERT(date, '25-12-1988', 105)),
-(5285824,	'Diana',	CONVERT(date, '25-12-1988', 105));
+(5285824,	'Diana',	CONVERT(date, '25-12-1988', 105))
 
 CREATE TABLE Bekeken(
-	Abonneenummer int FOREIGN KEY REFERENCES Account(Abonneenummer),
+	Abonneenummer int,
 	Profielnaam nvarchar(50),
 	Gezien int,
 	Percentage int,
